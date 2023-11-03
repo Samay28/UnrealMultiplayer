@@ -67,14 +67,15 @@ void AMultiplayerCoopCharacter::BeginPlay()
 	}
 }
 
-void AMultiplayerCoopCharacter::ServerRPCFunction_Implementation()
+void AMultiplayerCoopCharacter::ServerRPCFunction_Implementation(int args)
 {
 	if (HasAuthority())
 	{
 #if 0
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, TEXT("burrah"));
 #endif
-		if(!SphereMesh)
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, FString::Printf(TEXT("MyArgs : %d"), args));
+		if (!SphereMesh)
 		{
 			return;
 		}
@@ -88,11 +89,11 @@ void AMultiplayerCoopCharacter::ServerRPCFunction_Implementation()
 			StaticMeshActor->SetActorLocation(SpawnLocation);
 			UStaticMeshComponent *StaticMeshComponent = StaticMeshActor->GetStaticMeshComponent();
 
-			if(StaticMeshComponent)
+			if (StaticMeshComponent)
 			{
 				StaticMeshComponent->SetIsReplicated(true);
 				StaticMeshComponent->SetSimulatePhysics(true);
-				if(SphereMesh)
+				if (SphereMesh)
 				{
 					StaticMeshComponent->SetStaticMesh(SphereMesh);
 				}
@@ -156,4 +157,13 @@ void AMultiplayerCoopCharacter::Look(const FInputActionValue &Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+bool AMultiplayerCoopCharacter::ServerRPCFunction_Validate(int args)
+{
+	if (args >= 0 && args <= 100)
+	{
+		return true;
+	}
+	return false;
 }

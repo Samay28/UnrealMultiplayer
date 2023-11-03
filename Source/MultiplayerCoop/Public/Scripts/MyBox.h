@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Particles/ParticleSystem.h"
 #include "MyBox.generated.h"
 
 UCLASS()
@@ -29,8 +30,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void OnRep_ReplicatedValue();
 
+	UFUNCTION(NetMulticast,reliable)
+	void MyMulticastFunction();
+
 	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override; //chaap lo 
 
 	FTimerHandle TestTimer;
 	void DecreaseReplicatedVar();
+
+	UPROPERTY(EditAnywhere)
+	UParticleSystem* ExplosionEffect;
 };

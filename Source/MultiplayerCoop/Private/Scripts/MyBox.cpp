@@ -2,6 +2,7 @@
 
 #include "Scripts/MyBox.h"
 #include "Net/UnrealNetwork.h"
+#include "Kismet/GameplayStatics.h"
 // Sets default values
 AMyBox::AMyBox()
 {
@@ -20,7 +21,7 @@ void AMyBox::BeginPlay()
 
 	if (HasAuthority())
 	{
-		GetWorld()->GetTimerManager().SetTimer(TestTimer, this, &AMyBox::DecreaseReplicatedVar, 2.0f, false);
+		GetWorld()->GetTimerManager().SetTimer(TestTimer, this, &AMyBox::MyMulticastFunction, 2.0f, false);
 	}
 }
 
@@ -41,7 +42,7 @@ void AMyBox::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimePr
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(AMyBox, ReplicatedValue);
 }
-void AMyBox::DecreaseReplicatedVar()
+void AMyBox::DecreaseReplicatedVar() 
 {
 	if (HasAuthority())
 	{
@@ -49,7 +50,7 @@ void AMyBox::DecreaseReplicatedVar()
 		OnRep_ReplicatedValue();
 		if (ReplicatedValue > 0)
 		{
-			GetWorld()->GetTimerManager().SetTimer(TestTimer, this, &AMyBox::DecreaseReplicatedVar, 2.0f, false);
+			GetWorld()->GetTimerManager().SetTimer(TestTimer, this, &AMyBox::MyMulticastFunction, 2.0f, false);
 		}
 	}
 }
@@ -65,5 +66,23 @@ void AMyBox::OnRep_ReplicatedValue()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow,
 										 FString::Printf(TEXT("Client %d: OnRep_ReplicatedValue"), GPlayInEditorID));
+	}
+}
+void AMyBox::MyMulticastFunction_Implementation()
+{
+	if(HasAuthority())
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, TEXT("Server Multicasted"));
+		GetWorld()->GetTimerManager().SetTimer(TestTimer, this, &AMyBox::MyMulticastFunction, 2.0f, false);
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Client Multicasted"));
+	}
+
+	if(!IsRunningDedicatedServer())
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetActorLocation(),
+		FRotator::ZeroRotator, true, EPSCPoolMethod::AutoRelease);
 	}
 }
