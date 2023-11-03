@@ -60,6 +60,9 @@ protected:
 	UFUNCTION(Server, Reliable, blueprintCallable)
 	void ServerRPCFunction();
 
+	UPROPERTY(EditAnywhere, Category = Extras)
+	UStaticMesh* SphereMesh;
+
 public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
