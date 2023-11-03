@@ -9,6 +9,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Net/UnrealNetwork.h"
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -63,6 +64,14 @@ void AMultiplayerCoopCharacter::BeginPlay()
 		{
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
+	}
+}
+
+void AMultiplayerCoopCharacter::ServerRPCFunction_Implementation()
+{
+	if(HasAuthority())
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, TEXT("burrah"));
 	}
 }
 
