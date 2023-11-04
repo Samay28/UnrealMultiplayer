@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "Particles/ParticleSystem.h"
 #include "MultiplayerCoopCharacter.generated.h"
 
 UCLASS(config = Game)
@@ -55,6 +56,12 @@ protected:
 
 	UFUNCTION(Server, Reliable, WithValidation, blueprintCallable)
 	void ServerRPCFunction(int args);
+
+	UFUNCTION(Client, Reliable, BlueprintCallable)
+	void ClientRPCFunction();
+
+	UPROPERTY(EditAnywhere)
+	UParticleSystem* ExplosionEffectClient;
 
 	UPROPERTY(EditAnywhere, Category = Extras)
 	UStaticMesh *SphereMesh;

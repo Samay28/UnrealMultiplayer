@@ -42,7 +42,7 @@ void AMyBox::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimePr
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(AMyBox, ReplicatedValue);
 }
-void AMyBox::DecreaseReplicatedVar() 
+void AMyBox::DecreaseReplicatedVar()
 {
 	if (HasAuthority())
 	{
@@ -70,7 +70,7 @@ void AMyBox::OnRep_ReplicatedValue()
 }
 void AMyBox::MyMulticastFunction_Implementation()
 {
-	if(HasAuthority())
+	if (HasAuthority())
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, TEXT("Server Multicasted"));
 		GetWorld()->GetTimerManager().SetTimer(TestTimer, this, &AMyBox::MyMulticastFunction, 2.0f, false);
@@ -80,9 +80,9 @@ void AMyBox::MyMulticastFunction_Implementation()
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Client Multicasted"));
 	}
 
-	if(!IsRunningDedicatedServer())
+	if (!IsRunningDedicatedServer())
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetActorLocation(),
-		FRotator::ZeroRotator, true, EPSCPoolMethod::AutoRelease);
+												 FRotator::ZeroRotator, true, EPSCPoolMethod::AutoRelease);
 	}
 }

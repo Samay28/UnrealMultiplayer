@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Net/UnrealNetwork.h"
 #include "Engine/StaticMeshActor.h"
+#include "Kismet/GameplayStatics.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMultiplayerCoopCharacter
@@ -67,6 +68,15 @@ void AMultiplayerCoopCharacter::BeginPlay()
 	}
 }
 
+void AMultiplayerCoopCharacter::ClientRPCFunction_Implementation()
+{
+	if (ExplosionEffectClient)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffectClient, GetActorLocation(),
+												 FRotator::ZeroRotator, true, EPSCPoolMethod::AutoRelease);
+	}
+}
+
 void AMultiplayerCoopCharacter::ServerRPCFunction_Implementation(int args)
 {
 	if (HasAuthority())
@@ -79,7 +89,10 @@ void AMultiplayerCoopCharacter::ServerRPCFunction_Implementation(int args)
 		{
 			return;
 		}
-		AStaticMeshActor *StaticMeshActor = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass());
+
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this;
+		AStaticMeshActor *StaticMeshActor = GetWorld()->SpawnActor<AStaticMeshActor>(SpawnParams); // setting owner of the mesh
 		if (StaticMeshActor)
 		{
 			StaticMeshActor->SetReplicates(true);
