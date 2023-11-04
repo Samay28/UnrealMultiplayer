@@ -11,5 +11,6 @@ public class MultiplayerCoopTarget : TargetRules
 		DefaultBuildSettings = BuildSettingsVersion.V2;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_1;
 		ExtraModuleNames.Add("MultiplayerCoop");
+		bUsesSteam = true;
 	}
 }

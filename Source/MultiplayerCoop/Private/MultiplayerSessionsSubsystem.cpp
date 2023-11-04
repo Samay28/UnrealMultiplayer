@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "MultiplayerSessionsSubsystem.h"
+#include "OnlineSubsystem.h"
 
 void PrintString(const FString &str)
 {
@@ -11,14 +12,34 @@ void PrintString(const FString &str)
 }
 UMultiplayerSessionsSubsystem::UMultiplayerSessionsSubsystem()
 {
-    PrintString("Constructor");
 }
 
 void UMultiplayerSessionsSubsystem::Initialize(FSubsystemCollectionBase &Collection)
 {
-     PrintString("Initialiaze");
+    IOnlineSubsystem *OnlineSubsystem = IOnlineSubsystem::Get();
+    if (OnlineSubsystem)
+    {
+        FString SubsystemName = OnlineSubsystem->GetSubsystemName().ToString();
+        PrintString(SubsystemName);
+
+        SessionInterface = OnlineSubsystem->GetSessionInterface();
+
+        if (SessionInterface.IsValid())
+        {
+            PrintString("Valid hai bhai");
+        }
+    }
 }
 void UMultiplayerSessionsSubsystem::Deinitialize()
 {
-    UE_LOG(LogTemp, Warning, TEXT("hahahahaha"));
+}
+
+void UMultiplayerSessionsSubsystem::CreateServer(FString ServerName)
+{
+    PrintString("Created");
+}
+
+void UMultiplayerSessionsSubsystem::FindServer(FString ServerName)
+{
+    PrintString("Joined Server");
 }
