@@ -5,11 +5,11 @@
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "Interfaces/OnlineSessionInterface.h"
-#include "OnlineSessionSettings.h"  //for creating sessions
+#include "OnlineSessionSettings.h"
 #include "MultiplayerSessionsSubsystem.generated.h"
 
 /**
- *
+ * 
  */
 UCLASS()
 class MULTIPLAYERCOOP_API UMultiplayerSessionsSubsystem : public UGameInstanceSubsystem
@@ -19,7 +19,7 @@ class MULTIPLAYERCOOP_API UMultiplayerSessionsSubsystem : public UGameInstanceSu
 public:
 	UMultiplayerSessionsSubsystem();
 
-	void Initialize(FSubsystemCollectionBase &Collection) override; // copy paste from docs
+	void Initialize(FSubsystemCollectionBase& Collection) override;
 	void Deinitialize() override;
 
 	IOnlineSessionPtr SessionInterface;
@@ -30,13 +30,17 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void FindServer(FString ServerName);
 
-	void OnCreateSessionComplete(FName SessionName, bool WasSuccessful); //for delegates
+	void OnCreateSessionComplete(FName SessionName, bool WasSuccessful);
 	void OnDestroySessionComplete(FName SessionName, bool WasSuccessful);
+	void OnFindSessionsComplete(bool WasSuccessful);
+	void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result);
 
 	bool CreateServerAfterDestroy;
 	FString DestroyServerName;
 	FString ServerNameToFind;
 
+	UPROPERTY(EditAnywhere)
+	FName MySessionName;
+
 	TSharedPtr<FOnlineSessionSearch> SessionSearch;
-	void OnFindSessionsComplete(bool WasSuccessful);
 };
