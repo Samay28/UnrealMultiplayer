@@ -52,11 +52,11 @@ void UMultiplayerSessionsSubsystem::CreateServer(FString ServerName)
 {
 	PrintString("CreateServer");
 
-	// if (ServerName.IsEmpty())
-	// {
-	// 	PrintString("Server name cannot be empty!");
-	// 	return;
-	// }
+	if (ServerName.IsEmpty())
+	{
+		PrintString("Server name cannot be empty!");
+		return;
+	}
 
 	FNamedOnlineSession *ExistingSession = SessionInterface->GetNamedSession(MySessionName);
 	if (ExistingSession)
@@ -94,11 +94,11 @@ void UMultiplayerSessionsSubsystem::FindServer(FString ServerName)
 {
 	PrintString("FindServer");
 
-	// if (ServerName.IsEmpty())
-	// {
-	// 	PrintString("Server name cannot be empty!");
-	// 	return;
-	// }
+	if (ServerName.IsEmpty())
+	{
+		PrintString("Server name cannot be empty!");
+		return;
+	}
 
 	SessionSearch = MakeShareable(new FOnlineSessionSearch());
 	bool IsLAN = false;
@@ -111,6 +111,7 @@ void UMultiplayerSessionsSubsystem::FindServer(FString ServerName)
 	SessionSearch->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);
 
 	ServerNameToFind = ServerName;
+
 	SessionInterface->FindSessions(0, SessionSearch.ToSharedRef());
 }
 
