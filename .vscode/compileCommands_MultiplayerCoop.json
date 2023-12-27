@@ -2,7 +2,7 @@
 	{
 		"file": "C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\Source\\MultiplayerCoop\\MultiplayerCoop.Build.cs",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\VC\\Tools\\MSVC\\14.38.33129\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\.vscode\\compileCommands_MultiplayerCoop\\MultiplayerCoop.263.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
@@ -10,7 +10,7 @@
 	{
 		"file": "C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\Source\\MultiplayerCoop\\MultiplayerCoop.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\VC\\Tools\\MSVC\\14.38.33129\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\.vscode\\compileCommands_MultiplayerCoop\\MultiplayerCoop.263.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
@@ -18,7 +18,7 @@
 	{
 		"file": "C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\Source\\MultiplayerCoop\\MultiplayerCoop.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\VC\\Tools\\MSVC\\14.38.33129\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\.vscode\\compileCommands_MultiplayerCoop\\MultiplayerCoop.263.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
@@ -26,7 +26,7 @@
 	{
 		"file": "C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\Source\\MultiplayerCoop\\MultiplayerCoopCharacter.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\VC\\Tools\\MSVC\\14.38.33129\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\.vscode\\compileCommands_MultiplayerCoop\\MultiplayerCoop.263.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
@@ -34,7 +34,7 @@
 	{
 		"file": "C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\Source\\MultiplayerCoop\\MultiplayerCoopCharacter.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\VC\\Tools\\MSVC\\14.38.33129\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\.vscode\\compileCommands_MultiplayerCoop\\MultiplayerCoop.263.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
@@ -42,7 +42,7 @@
 	{
 		"file": "C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\Source\\MultiplayerCoop\\MultiplayerCoopGameMode.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\VC\\Tools\\MSVC\\14.38.33129\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\.vscode\\compileCommands_MultiplayerCoop\\MultiplayerCoop.263.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
@@ -50,7 +50,7 @@
 	{
 		"file": "C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\Source\\MultiplayerCoop\\MultiplayerCoopGameMode.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\VC\\Tools\\MSVC\\14.38.33129\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\.vscode\\compileCommands_MultiplayerCoop\\MultiplayerCoop.263.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
@@ -58,7 +58,7 @@
 	{
 		"file": "C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\Source\\MultiplayerCoop\\Private\\MultiplayerSessionsSubsystem.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\VC\\Tools\\MSVC\\14.38.33129\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\.vscode\\compileCommands_MultiplayerCoop\\MultiplayerCoop.263.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
@@ -66,7 +66,7 @@
 	{
 		"file": "C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\Source\\MultiplayerCoop\\Private\\Scripts\\MyBox.cpp",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\VC\\Tools\\MSVC\\14.38.33129\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\.vscode\\compileCommands_MultiplayerCoop\\MultiplayerCoop.263.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
@@ -74,7 +74,7 @@
 	{
 		"file": "C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\Source\\MultiplayerCoop\\Public\\MultiplayerSessionsSubsystem.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\VC\\Tools\\MSVC\\14.38.33129\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\.vscode\\compileCommands_MultiplayerCoop\\MultiplayerCoop.263.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
@@ -82,7 +82,7 @@
 	{
 		"file": "C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\Source\\MultiplayerCoop\\Public\\Scripts\\MyBox.h",
 		"arguments": [
-			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\VC\\Tools\\MSVC\\14.38.33129\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Asus\\Documents\\GitHub\\UnrealMultiplayer\\.vscode\\compileCommands_MultiplayerCoop\\MultiplayerCoop.263.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.2\\Engine\\Source"
