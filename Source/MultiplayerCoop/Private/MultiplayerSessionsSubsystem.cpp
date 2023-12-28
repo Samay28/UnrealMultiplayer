@@ -124,8 +124,14 @@ void UMultiplayerSessionsSubsystem::OnCreateSessionComplete(FName SessionName, b
 	ServerCreateDel.Broadcast(WasSuccessful); //TRUE
 
 	if (WasSuccessful)
-	{
-		GetWorld()->ServerTravel("/Game/ThirdPerson/Maps/ThirdPersonMap?listen");
+	{	
+		FString Path = "/Game/ThirdPerson/Maps/ThirdPersonMap?listen";
+
+		if(!MapPath.IsEmpty())
+		{
+			Path = FString::Printf(TEXT("%s?listen"), *MapPath);
+		}
+		GetWorld()->ServerTravel(Path);
 	}
 }
 
