@@ -30,7 +30,6 @@ APressurePlate::APressurePlate()
 	Mesh->SetRelativeScale3D(FVector(4.f, 4.f, 0.5f));
 	Mesh->SetRelativeLocation(FVector(0.0f, 0.0f, 7.2f));
 }
-
 // Called when the game starts or when spawned
 void APressurePlate::BeginPlay()
 {
@@ -66,7 +65,6 @@ void APressurePlate::Tick(float DeltaTime)
 			if (!Activated)
 			{
 				Activated = true;
-				GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::White, TEXT("Activate"));
 				OnActivated.Broadcast();
 			}
 		}
@@ -75,7 +73,6 @@ void APressurePlate::Tick(float DeltaTime)
 			if (Activated)
 			{
 				Activated = false;
-				GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::White, TEXT("Deactivate"));
 				OnDeactivated.Broadcast();
 			}
 		}

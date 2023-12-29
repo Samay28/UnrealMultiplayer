@@ -6,43 +6,46 @@
 #include "Components/ActorComponent.h"
 #include "Transporter.generated.h"
 
-
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class MULTIPLAYERCOOP_API UTransporter : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UTransporter();
 
 	FVector StartPoint;
 	FVector EndPoint;
-	
+
 	bool ArePointSet;
 
 	UPROPERTY(EditAnywhere)
 	float MoveTime;
 
 	UPROPERTY(EditAnywhere)
-	TArray<AActor*> TriggerActors;
+	TArray<AActor *> TriggerActors;
 
 	UPROPERTY(VisibleAnywhere)
 	int ActivatedTriggerCount;
 
-	UPROPERTY(BlueprintReadWrite,VisibleAnywhere)
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	bool AllTriggerActorsTriggered;
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void SetPoints(FVector Point1, FVector Point2);
+
+	UFUNCTION()
+	void OnPressurePlateActivated();
+
+	UFUNCTION()
+	void OnPressurePlateDeactivated();
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-		
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 };
