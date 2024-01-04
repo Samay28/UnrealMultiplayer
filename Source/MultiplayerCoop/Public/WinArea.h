@@ -1,33 +1,33 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// // Fill out your copyright notice in the Description page of Project Settings.
 
-#pragma once
+// #pragma once
 
-#include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
-#include "WinArea.generated.h"
+// #include "CoreMinimal.h"
+// #include "GameFramework/Actor.h"
+// #include "WinArea.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWinAreaOnWinCondition);
+// DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWinAreaOnWinCondition);
 
-UCLASS()
-class MULTIPLAYERCOOP_API AWinArea : public AActor
-{
-	GENERATED_BODY()
+// UCLASS()
+// class MULTIPLAYERCOOP_API AWinArea : public AActor
+// {
+// 	GENERATED_BODY()
 
-public:
-	// Sets default values for this actor's properties
-	AWinArea();
+// public:
+// 	// Sets default values for this actor's properties
+// 	AWinArea();
 
-	UFUNCTION(NetMulticast, Reliable)
-	void MulticastRPCWin();
+// 	UFUNCTION(NetMulticast, Reliable)
+// 	void MulticastRPCWin();
 
-	UPROPERTY(BlueprintAssignable)
-	FWinAreaOnWinCondition *OnWinCondition;
+// 	UPROPERTY(BlueprintAssignable)
+// 	FWinAreaOnWinCondition* OnWinCondition;
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+// protected:
+// 	// Called when the game starts or when spawned
+// 	virtual void BeginPlay() override;
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-};
+// public:
+// 	// Called every frame
+// 	virtual void Tick(float DeltaTime) override;
+// };
