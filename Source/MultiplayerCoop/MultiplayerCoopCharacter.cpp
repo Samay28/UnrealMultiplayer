@@ -12,6 +12,7 @@
 #include "Net/UnrealNetwork.h"
 #include "Engine/StaticMeshActor.h"
 #include "Kismet/GameplayStatics.h"
+#include "Weapons/Weapon.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMultiplayerCoopCharacter
@@ -51,6 +52,53 @@ AMultiplayerCoopCharacter::AMultiplayerCoopCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character)
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+}
+
+void AMultiplayerCoopCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	// if(OverlappingWeapon)
+	// {
+	// 	OverlappingWeapon->ShowPickupWidget(true);
+	// }
+}
+
+void AMultiplayerCoopCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon)
+{
+	if (OverlappingWeapon)
+	{
+		OverlappingWeapon->ShowPickupWidget(true);
+	}
+	if (LastWeapon)
+	{
+		LastWeapon->ShowPickupWidget(false);
+	}
+}
+
+void AMultiplayerCoopCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME_CONDITION(AMultiplayerCoopCharacter, OverlappingWeapon, COND_OwnerOnly); // SETTING CONDITIONS IS HELPFUL FOR SETTING REPLICATIONS
+}
+
+void AMultiplayerCoopCharacter::SetOverlappingWeapon(AWeapon *Weapon)
+{
+	if (IsLocallyControlled())
+	{
+		if (OverlappingWeapon)
+		{
+			OverlappingWeapon->ShowPickupWidget(false);
+		}
+	}
+	OverlappingWeapon = Weapon;
+	if (IsLocallyControlled())
+	{
+		if (OverlappingWeapon)
+		{
+			OverlappingWeapon->ShowPickupWidget(true);
+		}
+	}
 }
 
 void AMultiplayerCoopCharacter::BeginPlay()

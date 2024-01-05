@@ -39,6 +39,7 @@ class AMultiplayerCoopCharacter : public ACharacter
 
 public:
 	AMultiplayerCoopCharacter();
+	virtual void Tick(float DeltaTime) override;
 
 protected:
 	/** Called for movement input */
@@ -61,7 +62,7 @@ protected:
 	void ClientRPCFunction();
 
 	UPROPERTY(EditAnywhere)
-	UParticleSystem* ExplosionEffectClient;
+	UParticleSystem *ExplosionEffectClient;
 
 	UPROPERTY(EditAnywhere, Category = Extras)
 	UStaticMesh *SphereMesh;
@@ -71,4 +72,16 @@ public:
 	FORCEINLINE class USpringArmComponent *GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent *GetFollowCamera() const { return FollowCamera; }
+
+private:
+	UPROPERTY(ReplicatedUsing = OnRep_OverlappingWeapon)
+	class AWeapon *OverlappingWeapon;
+
+	UFUNCTION()
+	void OnRep_OverlappingWeapon(AWeapon* LastWeapon); //we make this function to check if variable has been changed
+
+public:
+	// my input
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
+	void SetOverlappingWeapon(AWeapon *Weapon);
 };
