@@ -88,6 +88,9 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	class UCombatComponent* Combat;
 
+	UFUNCTION(Server, Reliable)
+	void ServerEquipButtonPressed();
+
 public:
 	// my input
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;

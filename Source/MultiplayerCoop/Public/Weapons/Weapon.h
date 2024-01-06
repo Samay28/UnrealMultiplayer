@@ -13,10 +13,11 @@ enum class EWeaponState : uint8
 	EWS_Equipped UMETA(DisplayName = "Equipped State"),
 	EWS_Dropped UMETA(DisplayName = "Dropped State"),
 
-	EWS_Max UMETA(DisplayName = "Default") //for letting us  know total states
+	EWS_Max UMETA(DisplayName = "Default") // for letting us  know total states
 };
 
-UCLASS() class MULTIPLAYERCOOP_API AWeapon : public AActor
+UCLASS()
+class MULTIPLAYERCOOP_API AWeapon : public AActor
 {
 	GENERATED_BODY()
 
@@ -25,16 +26,16 @@ public:
 	AWeapon();
 	virtual void Tick(float DeltaTime) override;
 	void ShowPickupWidget(bool bShowWidget);
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	UFUNCTION()
-	virtual void OnSphereOverlap(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	virtual void OnSphereOverlap(UPrimitiveComponent *OverlapComp, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult);
 	UFUNCTION()
-	virtual void OnSphereEndOverlap(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
+	virtual void OnSphereEndOverlap(UPrimitiveComponent *OverlapComp, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex);
 
 private:
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
@@ -43,13 +44,16 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
 	class USphereComponent *Area;
 
-	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
+	UPROPERTY(ReplicatedUsing = OnRep_WeaponState, VisibleAnywhere, Category = "Weapon Properties")
 	EWeaponState WeaponState;
 
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
-	class UWidgetComponent* PickupWidget;
+	class UWidgetComponent *PickupWidget;
+
+	UFUNCTION()
+	void OnRep_WeaponState();
 
 public:
-	FORCEINLINE void SetWeaponState(EWeaponState State) {WeaponState = State;}
-
+	void SetWeaponState(EWeaponState State);
+	FORCEINLINE USphereComponent *GetAreaSphere() const { return Area; }
 };

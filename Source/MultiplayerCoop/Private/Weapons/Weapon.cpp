@@ -5,7 +5,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "MultiplayerCoop/MultiplayerCoopCharacter.h"
-
+#include "Net/UnrealNetwork.h"
 
 // Sets default values
 AWeapon::AWeapon()
@@ -59,7 +59,6 @@ void AWeapon::OnSphereOverlap(UPrimitiveComponent *OverlapComp, AActor *OtherAct
 		Character->SetOverlappingWeapon(this);
 	}
 }
-// Called every frame
 void AWeapon::OnSphereEndOverlap(UPrimitiveComponent *OverlapComp, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex)
 {
 	AMultiplayerCoopCharacter *Character = Cast<AMultiplayerCoopCharacter>(OtherActor);
@@ -68,10 +67,38 @@ void AWeapon::OnSphereEndOverlap(UPrimitiveComponent *OverlapComp, AActor *Other
 		Character->SetOverlappingWeapon(NULL);
 	}
 }
+
+void AWeapon::SetWeaponState(EWeaponState State)
+{
+	WeaponState = State;
+	switch (WeaponState)
+	{
+	case EWeaponState::EWS_Equipped:
+		ShowPickupWidget(false);
+		Area->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		break;
+	}
+}
+void AWeapon::OnRep_WeaponState()
+{
+	switch (WeaponState)
+	{
+	case EWeaponState::EWS_Equipped:
+		ShowPickupWidget(false);
+		// Area->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		break;
+	}
+}
 void AWeapon::ShowPickupWidget(bool bShowWidget)
 {
-	if(PickupWidget)
+	if (PickupWidget)
 	{
 		PickupWidget->SetVisibility(bShowWidget);
 	}
+}
+void AWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AWeapon, WeaponState);
 }

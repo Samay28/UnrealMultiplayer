@@ -52,7 +52,7 @@ AMultiplayerCoopCharacter::AMultiplayerCoopCharacter()
 	FollowCamera->bUsePawnControlRotation = false;								// Camera does not rotate relative to arm
 
 	Combat = CreateDefaultSubobject<UCombatComponent>(TEXT("Combat Component"));
-	Combat->SetIsReplicated(true); //comoponents dont need GetLifetimeReplicatedProps
+	Combat->SetIsReplicated(true); // comoponents dont need GetLifetimeReplicatedProps
 }
 
 void AMultiplayerCoopCharacter::Tick(float DeltaTime)
@@ -73,6 +73,14 @@ void AMultiplayerCoopCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon)
 	if (LastWeapon)
 	{
 		LastWeapon->ShowPickupWidget(false);
+	}
+}
+
+void AMultiplayerCoopCharacter::ServerEquipButtonPressed_Implementation()
+{
+	if (Combat)
+	{
+		Combat->EquipWeapon(OverlappingWeapon);
 	}
 }
 
@@ -105,7 +113,7 @@ void AMultiplayerCoopCharacter::SetOverlappingWeapon(AWeapon *Weapon)
 void AMultiplayerCoopCharacter::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-	if(Combat)
+	if (Combat)
 	{
 		Combat->Character = this;
 	}
@@ -192,7 +200,7 @@ void AMultiplayerCoopCharacter::SetupPlayerInputComponent(class UInputComponent 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMultiplayerCoopCharacter::Look);
 
-		//interact
+		// interact
 		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Triggered, this, &AMultiplayerCoopCharacter::EquipButtonPressed);
 	}
 }
@@ -235,9 +243,16 @@ void AMultiplayerCoopCharacter::Look(const FInputActionValue &Value)
 
 void AMultiplayerCoopCharacter::EquipButtonPressed()
 {
-	if(Combat && HasAuthority())
+	if (Combat)
 	{
-		Combat->EquipWeapon(OverlappingWeapon);
+		if (HasAuthority())
+		{
+			Combat->EquipWeapon(OverlappingWeapon);
+		}
+		else
+		{
+			ServerEquipButtonPressed();
+		}
 	}
 }
 
