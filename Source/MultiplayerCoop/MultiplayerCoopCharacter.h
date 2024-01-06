@@ -37,6 +37,9 @@ class AMultiplayerCoopCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction *LookAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputAction *InteractAction;
+
 public:
 	AMultiplayerCoopCharacter();
 	virtual void Tick(float DeltaTime) override;
@@ -47,6 +50,8 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue &Value);
+
+	void EquipButtonPressed();
 
 protected:
 	// APawn interface
@@ -80,8 +85,12 @@ private:
 	UFUNCTION()
 	void OnRep_OverlappingWeapon(AWeapon* LastWeapon); //we make this function to check if variable has been changed
 
+	UPROPERTY(VisibleAnywhere)
+	class UCombatComponent* Combat;
+
 public:
 	// my input
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
 	void SetOverlappingWeapon(AWeapon *Weapon);
+	virtual void PostInitializeComponents() override;
 };

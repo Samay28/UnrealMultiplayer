@@ -13,6 +13,7 @@
 #include "Engine/StaticMeshActor.h"
 #include "Kismet/GameplayStatics.h"
 #include "Weapons/Weapon.h"
+#include "CharacterComponents/CombatComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMultiplayerCoopCharacter
@@ -50,8 +51,8 @@ AMultiplayerCoopCharacter::AMultiplayerCoopCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false;								// Camera does not rotate relative to arm
 
-	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character)
-	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+	Combat = CreateDefaultSubobject<UCombatComponent>(TEXT("Combat Component"));
+	Combat->SetIsReplicated(true); //comoponents dont need GetLifetimeReplicatedProps
 }
 
 void AMultiplayerCoopCharacter::Tick(float DeltaTime)
@@ -98,6 +99,15 @@ void AMultiplayerCoopCharacter::SetOverlappingWeapon(AWeapon *Weapon)
 		{
 			OverlappingWeapon->ShowPickupWidget(true);
 		}
+	}
+}
+
+void AMultiplayerCoopCharacter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	if(Combat)
+	{
+		Combat->Character = this;
 	}
 }
 
@@ -181,6 +191,9 @@ void AMultiplayerCoopCharacter::SetupPlayerInputComponent(class UInputComponent 
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMultiplayerCoopCharacter::Look);
+
+		//interact
+		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Triggered, this, &AMultiplayerCoopCharacter::EquipButtonPressed);
 	}
 }
 
@@ -217,6 +230,14 @@ void AMultiplayerCoopCharacter::Look(const FInputActionValue &Value)
 		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
+	}
+}
+
+void AMultiplayerCoopCharacter::EquipButtonPressed()
+{
+	if(Combat && HasAuthority())
+	{
+		Combat->EquipWeapon(OverlappingWeapon);
 	}
 }
 
